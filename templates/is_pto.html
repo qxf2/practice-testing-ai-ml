@@ -1,0 +1,50 @@
+{% extends "base.html" %} {% block content %}
+<div class="container toppy">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <h1 class="margin-base-vertical top-space-30 text-center">Are you asking for leave?</h1>
+            <p class="input-group top-space-30">
+                <span class="input-group-addon">
+                    <span class="icon-arrow-right"></span>
+                </span>
+                <input type="text" id="query" class="form-control input-lg"
+                    placeholder="Enter a message like 'I am out sick today'">
+            </p>
+            <p class="text-center top-space-40">
+                <button type="submit" class="btn btn-success btn-lg" id="isThisAPTO">Guess!</button>
+            </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <p class="text-center top-space-20" id="resultDiv">
+            </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="text-center">
+            <img src="/static/img/is_this_a_pto.jpg" class="pto-meme rounded  mx-auto d-block">
+        </div>
+    </div>
+</div>
+<script>
+    $("document").ready(function () {
+        $("#isThisAPTO").click(function () {
+            var message = $('#query').val();
+            var callDetails = {
+                type: 'POST',
+                url: '/is-pto',
+                data: {
+                    'message': message
+                }
+            };
+            $.ajax(callDetails).done(function (result) {
+                console.log('Hello! I am in the done part of the ajax call');
+                console.log(result);
+                $("#resultDiv").css('color', 'black');
+                $("#resultDiv").text(result.answer);
+            });
+        });
+    });
+</script>
+{% endblock %}

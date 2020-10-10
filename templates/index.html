@@ -1,0 +1,41 @@
+{% extends "base.html" %} {% block content %}
+<div class="row top-space-30">
+    <div class="col-md-8 col-md-offset-2">
+        <div class="panel">
+            <h3 id="summary">What is this?</h3>
+            <p class="mb-0 text-justify" id="description">Testers, use this site to practice testing AI/ML based applications. Most professional testers do not get the chance to wet their feet at testing real AI/ML based applications. Even when motivated testers pick a random application and try testing, the applications and features seem too vast and opaque to test methodically. To get past this, we have developed some simple AI/ML based applications that do just one or two things well enough to challenge a professional tester. <i>Your exercise</i> will be to test the application and discuss your ideas with other testers. The applications listed have been developed and maintained by <a href="https://www.qxf2.com/?utm_source=qa-aiml-index&utm_medium=click&utm_campaign=From%20QA%20AIML">Qxf2 Services</a>. We would love to hear how you go about testing such apps! </p>
+        </div>
+        <div class="col-md-2">
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+        <div class="panel">
+            <h3 id="summary">Application list</h3>
+            <p class="mb-0 text-justify">As of Oct-2020, we have only one application: </p>
+            <ol>
+                <li>
+                    <b>
+                        <a href="/is-pto">Is this a 'leave message'?</a>
+                    </b>
+                    <p>Post a sentence and the app will tell you if you are applying for leave or not. This is a sentence classifier. I adapted the code in this <a href="https://www.youtube.com/watch?v=5xDE06RRMFk">YouTube tutorial</a> by <a href="http://coding-maniac.com/">Johannes Frey</a> to make this application. I trained it on around 3200 messages posted on Qxf2's PTO Skype channel. There is definitely a bias in that we live in India and our English is different from say someone in Australia. Similarly, certain words seem to throw the classifier off and it is fun to discover these words and just add them randomly to your messages.</p>
+                </li>
+            </ol>
+        </div>
+        <div class="col-md-2">
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+        <div class="panel">
+            <h3 id="summary">We would love to hear from you!</h3>
+            <p class="mb-0 text-justify">We are professional testers who are learning how to test AI/ML based applications. We are not experts. We do not have the right answers. In fact, we struggle! But we make an honest attempt to practice and improve. And we share our work on our <a href="https://qxf2.com/blog">blog</a> and speak openly about the troubles we have testing more complex applications and the solutions we try out at our clients. So, if you are a tester on a journey similar to ours, please reach out and share your ideas, difficulties and thoughts. Reach out to us either on <a href="https://linkedin.com/company/qxf2-services">LinkedIn</a> or <a href="https://twitter.com/@Qxf21">Twitter</a> or email me (Arun: mak@qxf2.com) directly.
+        </div>
+        <div class="col-md-2">
+            &nbsp;
+        </div>
+    </div>
+</div>
+{% endblock %}

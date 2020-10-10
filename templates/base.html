@@ -1,0 +1,109 @@
+<html>
+
+<head>
+    <title>Practice testing AI/ML based applications</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+        body {
+            padding-top: 40px;
+            font-size: 16px;
+            font-family: "Open Sans", serif;
+            line-height: 2.0;
+        }
+
+        .top-space-30 {
+            padding-top: 30px;
+        }
+
+        a.see-full-list {
+            line-height: 2.0;
+            font-family: "Open Sans", "Abel", Arial, sans-serif;
+            font-size: 12px;
+        }
+
+        td.details-control {
+            cursor: pointer;
+        }
+
+        tr.description {
+            font-family: "Abel", Arial;
+            color: grey;
+            line-height: 2.0;
+        }
+
+        .qxf2_copyright {
+            font-family: "Abel", Arial, sans-serif;
+            font-size: 12px;
+        }
+
+        img.logo{
+            max-height: 80px;
+            max-width: 80px;
+        }
+
+        img.pto-meme{
+            max-height: 250px;
+            max-width: 250px;
+        }
+
+        .toppy {
+            padding-top: 70px;
+        }
+
+    </style>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-38578610-10"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-38578610-10');
+    </script>
+</head>
+
+<body>
+    <!-- Fixed navbar Src: https://getbootstrap.com/examples/navbar-fixed-top/#-->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/"><img src="/static/img/robot_queen.png"
+                        alt="Practice testing AI/ML based applications" class="logo img-responsive img-circle"></img></a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse pull-right top-space-10">
+                <ul class="nav navbar-nav">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/about">About</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        {% block content %}{% endblock %}
+    </div>
+    <div class="col-md-12">
+        <div class="row-fluid">
+            <!--Copyright-->
+            <p class="margin-base-vertical text-center qxf2_copyright">
+                © <a href="https://www.qxf2.com/?utm_source=qa-aiml&utm_medium=click&utm_campaign=From%20QA%20AIML">Qxf2
+                    Services</a>
+                <script>document.write(new Date().getFullYear())</script>
+                <!---
+                <script>document.write(new Date().getFullYear())</script>-->
+            </p>
+        </div>
+        <!--Copyright-->
+    </div>
+</body>
+
+</html>
