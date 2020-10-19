@@ -23,7 +23,7 @@ def is_pto():
     response = render_template("is_pto.html")
     if request.method == 'POST':
         message = request.form.get('message')
-        prediction_score = pto_classifier.is_this_a_pto(message)
+        prediction_score = int(pto_classifier.is_this_a_pto(message))
         response = jsonify({"score" : prediction_score, "message" : message})
 
     return response
