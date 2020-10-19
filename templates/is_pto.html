@@ -39,7 +39,6 @@
                 }
             };
             $.ajax(callDetails).done(function (result) {
-                console.log(result);
                 if(result.score == 1){
                     $("#resultDiv").text(result.message + " is a PTO message");
                 }
