@@ -39,10 +39,13 @@
                 }
             };
             $.ajax(callDetails).done(function (result) {
-                console.log('Hello! I am in the done part of the ajax call');
                 console.log(result);
-                $("#resultDiv").css('color', 'black');
-                $("#resultDiv").text(result.answer);
+                if(result.score == 1){
+                    $("#resultDiv").text(result.message + " is a PTO message");
+                }
+                else{
+                    $("#resultDiv").text(result.message + " is not a PTO message");
+                }
             });
         });
     });

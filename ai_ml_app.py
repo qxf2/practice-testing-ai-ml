@@ -24,9 +24,7 @@ def is_pto():
     if request.method == 'POST':
         message = request.form.get('message')
         prediction_score = pto_classifier.is_this_a_pto(message)
-        prediction_text = "a PTO" if prediction_score==1 else "not a PTO"
-        prediction_text = f'"{message}" is {prediction_text} message'
-        response = jsonify({"answer": prediction_text})
+        response = jsonify({"score" : prediction_score, "message" : message})
 
     return response
 
