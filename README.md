@@ -5,6 +5,9 @@ Software testers can use the apps in this repo to practice testing applications 
 1. Create a virtual environment for yourself (we used Python 3.7)
 2. Activate the virtual environment
 3. Install required Python modules `pip install -r requirements.txt`
+3a. Type `python` to bring up the Python interpreter of your virtualenv
+3b. `import nltk` and then `nltk.download('stopwords')`
+3c. Exit out of the Python interpreter
 4. Start the server `python ai_ml_app.py`
 5. Visit http://localhost:6464 on your Browser
 6. Read through the home page displayed to learn more about this application
