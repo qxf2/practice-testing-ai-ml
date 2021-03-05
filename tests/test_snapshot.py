@@ -1,12 +1,6 @@
-"""
-API tests to check accuracy for is pto app
-
-"""
-
-import csv
-import os
-import sys
-import requests
+import pytest
+import csv, requests
+import os, sys
 
 def read_csv():
     "Reading the CSV file"
@@ -21,12 +15,11 @@ def read_csv():
 
     return pto_text, length_of_rows
 
-
-def calculate_accuracy(redf_pto_text, redf_url, total_message_length):
+def calculate_accuracy(pto_text, url, total_message_length):
     "Accuracy calculation"
     total_score = 0
-    for each_text in redf_pto_text:
-        url = redf_url
+    for each_text in pto_text:
+        url = url
         data = {'message': each_text}
         response = requests.post(url,data=data)
         actual_score = each_text[1]
@@ -34,11 +27,10 @@ def calculate_accuracy(redf_pto_text, redf_url, total_message_length):
         if response.json()['score'] == int(actual_score):
             total_score += 1
     accuracy = total_score/total_message_length
-
     return accuracy
 
 
-def calucalte_true_false_val(redf_pto_text, url):
+def calcualte_true_false_val(redf_pto_text, url):
     "Calculate true positive, false negative, false positive"
     total_positive_predicted_message_correctly = 0
     total_positive_predicted_message = 0
@@ -75,17 +67,24 @@ def cal_score_val(redf_false_negative, redf_true_positive, redf_false_positive):
     f1_score = round(2 *((precision*recall)/(precision+recall)),2)
     print(f'F1 Score:{f1_score}')
 
+    return precision, recall, f1_score
 
-if __name__ == "__main__":
+
+def test_snapshot_accuracy(snapshot):
     len_of_args = len(sys.argv)
     pto_text,message_length = read_csv()
-    if len_of_args == 2:
-        app_url = sys.argv[1]
+    if len_of_args == 3:
+        app_url = sys.argv[3]
     else:
         app_url = "https://practice-testing-ai-ml.qxf2.com/is-pto"
     response = requests.get(app_url)
-    #Accuracy calculation
-    final_accuracy = round(calculate_accuracy(pto_text, app_url, message_length),2)
-    print(f'accuracy: {final_accuracy}')
-    false_negative, true_positive,false_positive = calucalte_true_false_val(pto_text, app_url)
-    cal_score_val(false_negative, true_positive, false_positive)
+
+    accuracy = round(calculate_accuracy(pto_text,app_url,message_length),2)
+
+    false_negative, true_positive,false_positive = calcualte_true_false_val(pto_text, app_url)
+
+    precision,recall,f1_score = cal_score_val(false_negative, true_positive, false_positive)
+    #Creating snapshot directory
+    snapshot.snapshot_dir = 'snapshots'
+    snapshot.assert_match(f"{accuracy},{precision},{recall},{f1_score}","overall_score.txt")
+
