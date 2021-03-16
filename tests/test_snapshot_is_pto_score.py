@@ -73,8 +73,8 @@ def cal_score_val(redf_false_negative, redf_true_positive, redf_false_positive):
 def test_snapshot_accuracy(snapshot):
     len_of_args = len(sys.argv)
     pto_text,message_length = read_csv()
-    if len_of_args == 3:
-        app_url = sys.argv[3]
+    if len_of_args == 4:
+        app_url = sys.argv[4]
     else:
         app_url = "https://practice-testing-ai-ml.qxf2.com/is-pto"
     response = requests.get(app_url)
