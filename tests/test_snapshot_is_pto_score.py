@@ -5,7 +5,7 @@ import os, sys
 def read_csv():
     "Reading the CSV file"
     pto_text = []
-    csv_file = os.path.abspath(os.path.join(os.path.dirname( __file__ ), 'pto-reasons-with-label.csv'))
+    csv_file = os.path.abspath(os.path.join(os.path.dirname( __file__ ), '..','conf/pto-reasons-with-label.csv'))
     with open(csv_file) as pto_file:
         for each_row in pto_file:
             pto_text.append(each_row.split(','))
