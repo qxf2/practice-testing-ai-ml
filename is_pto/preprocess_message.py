@@ -11,7 +11,7 @@ ADD_STOP_WORDS = ['today', 'tomorrow', 'yesterday']
 
 def clean_sqs_skype_formatting(message):
     "Clean up unwanted Skype and SQS formatting"
-    cleaned_message = re.sub(r'<quote .*</quote>', '', message)
+    cleaned_message = re.sub(r'<quote.*</quote>', '', message)
     cleaned_message = re.sub(r'<.*</.*?>', '', cleaned_message) #quoted message
     cleaned_message = re.sub(r'\B@\w+', '', cleaned_message) #@mentions
     cleaned_message = re.sub(r'&.*?;', '', cleaned_message) #encoded strings
