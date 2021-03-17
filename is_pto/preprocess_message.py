@@ -6,12 +6,13 @@ b) Mimic the training model - remove stop words and stem the words
 import re
 from nltk.corpus import stopwords
 from nltk.stem import SnowballStemmer
-NOT_STOP_WORDS = ['not']
+NOT_STOP_WORDS = ['not','off','be','will','before','after','out']
 ADD_STOP_WORDS = ['today', 'tomorrow', 'yesterday']
 
 def clean_sqs_skype_formatting(message):
     "Clean up unwanted Skype and SQS formatting"
-    cleaned_message = re.sub(r'<.*</.*?>', '', message) #quoted message
+    cleaned_message = re.sub(r'<quote>.*</quote>', '', message)
+    cleaned_message = re.sub(r'<.*</.*?>', '', cleaned_message) #quoted message
     cleaned_message = re.sub(r'\B@\w+', '', cleaned_message) #@mentions
     cleaned_message = re.sub(r'&.*?;', '', cleaned_message) #encoded strings
     cleaned_message = re.sub(r'^(\s)*$\n', '', cleaned_message) #emtpy lines
