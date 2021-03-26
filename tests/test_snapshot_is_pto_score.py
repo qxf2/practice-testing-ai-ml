@@ -84,7 +84,7 @@ def test_snapshot_accuracy(snapshot):
     false_negative, true_positive,false_positive = calcualte_true_false_val(pto_text, app_url)
 
     precision,recall,f1_score = cal_score_val(false_negative, true_positive, false_positive)
+
     #Creating snapshot directory
-    snapshot.snapshot_dir = 'snapshots'
     snapshot.assert_match(f"{accuracy},{precision},{recall},{f1_score}","overall_score.txt")
 
