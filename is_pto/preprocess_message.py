@@ -15,7 +15,7 @@ def clean_sqs_skype_formatting(message):
     cleaned_message = re.sub(r'\B@\w+', '', cleaned_message) #@mentions
     cleaned_message = re.sub(r'&.*?;', '', cleaned_message) #encoded strings
     cleaned_message = re.sub(r'^(\s)*$\n', '', cleaned_message) #emtpy lines
-    cleaned_message = re.sub(r'^<.*', '', cleaned_message) #markdown message
+    cleaned_message = re.sub(r'^<.*>', '', cleaned_message) #markdown message
     cleaned_message = cleaned_message.replace('<legacyquote>', '')
     cleaned_message = cleaned_message.replace(',', ' ')
     cleaned_message = cleaned_message.replace('.', ' ')
