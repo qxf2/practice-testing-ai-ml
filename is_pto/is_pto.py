@@ -5,7 +5,7 @@ import os
 import pickle
 import re
 #import is_pto.preprocess_message as message_cleaner
-#from memory_profiler import profile
+from memory_profiler import profile
 
 import re
 from nltk.corpus import stopwords
