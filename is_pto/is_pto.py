@@ -5,7 +5,9 @@ import os
 import pickle
 import re
 #import is_pto.preprocess_message as message_cleaner
-from memory_profiler import profile
+#from memory_profiler import profile
+from pympler import muppy, summary, tracker
+import objgraph
 
 import re
 from nltk.corpus import stopwords
@@ -61,7 +63,7 @@ def store_message(message):
     with open(QUERIES_FILENAME,'a') as file_handler:
         file_handler.write(message + "\n")
 
-@profile
+#@profile
 def is_this_a_pto(message):
     "Return a prediction of whether this is a PTO or not"
     answer = 0
@@ -72,9 +74,29 @@ def is_this_a_pto(message):
         message = get_clean_message(message)
         store_message(message)
         answer = model.predict([message])[0]
+
+    #all_objects = muppy.get_objects()
+    #sum1 = summary.summarize(all_objects)
+    #summary.print_(sum1)
+    #biggest_vars = muppy.sort(muppy.get_objects())[-3:]
+    #objgraph.show_backrefs(biggest_vars, filename='backref.png')
+
     return answer
 
 
 if __name__=='__main__':
-    ans = is_this_a_pto('I am taking PTO tomorrow')
-    print(f'\nANSWER : {ans}\n')
+    #ans = is_this_a_pto('I am taking PTO tomorrow')
+    #print(f'\nANSWER : {ans}\n')
+    print('Difference in memory tracked at the start : \n')
+    memory_tracker = tracker.SummaryTracker()
+    memory_tracker.print_diff()
+    messages = ['I am taking PTO tomorrow', 'Iam unwell']
+    for msg in messages:
+        print(f'Running prediction for message : {msg}\n')
+        ans = is_this_a_pto(msg)
+        all_objects = muppy.get_objects()
+        print(f'Summary of memory heap, post prediction of msg : {msg} \n')
+        sum1 = summary.summarize(all_objects)
+        summary.print_(sum1)
+        print('Difference in memory tracked at this point : \n')
+        memory_tracker.print_diff()
