@@ -39,9 +39,9 @@ def is_pto():
 def metrics():
     # update Prometheus gauges with CPU and RAM usage
     cpu_percent = psutil.cpu_percent()
-    mem_info = psutil.virtual_memory()
+    ram_info = psutil.virtual_memory()
     cpu_usage.set(cpu_percent)
-    ram_usage.set(mem_info.percent)
+    ram_usage.set(ram_info.percent)
 
     # generate Prometheus metrics in the appropriate format
     return Response(generate_latest(), mimetype="text/plain")
