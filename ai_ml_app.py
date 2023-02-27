@@ -35,7 +35,7 @@ def is_pto():
         response = jsonify({"score" : prediction_score, "message" : message})
     return response
 
-@app.route("/metrics")
+@app.route("/metrics", methods=["GET"])
 def metrics():
     # update Prometheus gauges with CPU and RAM usage
     cpu_percent = psutil.cpu_percent()
