@@ -3,11 +3,9 @@ A Flask application that wraps around AI/ML models.
 Qxf2 wrote this to help testers practice testing AI/ML based applications.
 To learn more, see the README.md of this application.
 """
-from flask import Flask, jsonify, render_template, request
+from flask import Flask, jsonify, render_template, request , Response
 import is_pto.is_pto as pto_classifier
-from flask import Flask, Response
-from prometheus_client import generate_latest
-from prometheus_client import Gauge
+from prometheus_client import generate_latest , Gauge
 import psutil
 
 app = Flask(__name__)
@@ -48,4 +46,4 @@ def metrics():
 
 #---START OF SCRIPT
 if __name__ == '__main__':
-    app.run(debug=True , host='0.0.0.0', port=6464)
+    app.run(host='0.0.0.0', port=6464)
