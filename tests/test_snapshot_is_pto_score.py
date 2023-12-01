@@ -1,6 +1,7 @@
-import pytest
-import csv, requests
-import os, sys
+import csv
+import requests
+import os
+import sys
 
 def read_csv():
     "Reading the CSV file"
@@ -71,6 +72,7 @@ def cal_score_val(redf_false_negative, redf_true_positive, redf_false_positive):
 
 
 def test_snapshot_accuracy(snapshot):
+    "Create snapshot of evaluation metric"
     len_of_args = len(sys.argv)
     pto_text,message_length = read_csv()
     if len_of_args == 4:
@@ -87,4 +89,3 @@ def test_snapshot_accuracy(snapshot):
 
     #Creating snapshot directory
     snapshot.assert_match(f"{accuracy},{precision},{recall},{f1_score}","overall_score.txt")
-
