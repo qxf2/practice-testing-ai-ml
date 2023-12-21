@@ -26,12 +26,17 @@ def about():
 @app.route("/is-pto", methods=['GET', 'POST'])
 def is_pto():
     "Is the message a PTO?"
-    response = render_template("is_pto.html")
+    exp = None
+    #response = render_template("is_pto.html")
     if request.method == 'POST':
         message = request.form.get('message')
         prediction_score = int(pto_classifier.is_this_a_pto(message))
-        response = jsonify({"score" : prediction_score, "message" : message})
-    return response
+        #response = jsonify({"score" : prediction_score, "message" : message})
+        exp = pto_classifier.lime_explainer(message)
+        exp = exp.as_html()       
+        return jsonify({"score" : prediction_score, "message" : message, "exp" : exp})
+    
+    return render_template('is_pto.html')
 
 @app.route("/metrics", methods=["GET"])
 def metrics():

@@ -13,6 +13,9 @@
             <p class="text-center top-space-40">
                 <button type="submit" class="btn btn-success btn-lg" id="isThisAPTO">Guess!</button>
             </p>
+            <p class="text-center top-space-40">
+                <button type="submit" class="btn btn-success btn-lg" id="explainResults">Explain Results!</button>
+            </p>
         </div>
     </div>
     <div class="row">
@@ -29,21 +32,48 @@
     <div class="row">
         <div class="text-justify">
             <h3 class="margin-base-vertical top-space-30">Examples</h1>
-            <p class="input-group top-space-30">Try out sentences that indicate that you want to take some time off from work. Some examples you can try are:
+                <p class="input-group top-space-30">Try out sentences that indicate that you want to take some time off
+                    from work. Some examples you can try are:
                 <ol>
                     <li>Taking PTO on these dates Nov-27th(Friday) Dec-3rd(Thursday)</li>
-                    <li>I am  cancelling my today's PTO and working today</li>
-                    <li>I am travelling to hometown on some unplanned personal work... will not be able to work today. Taking PTO </li>
+                    <li>I am cancelling my today's PTO and working today</li>
+                    <li>I am travelling to hometown on some unplanned personal work... will not be able to work today.
+                        Taking PTO </li>
                     <li>Down with fever and cold. Taking the day off</li>
                     <li>I am having a bad headache so taking sick off for today.</li>
-                </ol> </p>
+                </ol>
+                </p>
 
         </div>
     </div>
     <div class="row">
         <div class="text-justify">
             <h3 class="margin-base-vertical top-space-30">About this app</h1>
-            <p class="input-group top-space-30">Post a sentence and the app will tell you if you are applying for leave or not. This is a sentence classifier. I adapted the code in this <a href="https://www.youtube.com/watch?v=5xDE06RRMFk">YouTube tutorial</a> by <a href="http://coding-maniac.com/">Johannes Frey</a> to make this application. I trained it on around 3200 messages posted on Qxf2's 'leave' Skype channel. There is definitely a bias in the training dataset. We live in India and our English is different from say someone in Australia. Similarly, certain words seem to throw the classifier off and it is fun to discover these words and just add them randomly to your messages. </p>
+                <p class="input-group top-space-30">Post a sentence and the app will tell you if you are applying for
+                    leave or not. This is a sentence classifier. I adapted the code in this <a
+                        href="https://www.youtube.com/watch?v=5xDE06RRMFk">YouTube tutorial</a> by <a
+                        href="http://coding-maniac.com/">Johannes Frey</a> to make this application. I trained it on
+                    around 3200 messages posted on Qxf2's 'leave' Skype channel. There is definitely a bias in the
+                    training dataset. We live in India and our English is different from say someone in Australia.
+                    Similarly, certain words seem to throw the classifier off and it is fun to discover these words and
+                    just add them randomly to your messages. </p>
+        </div>
+    </div>
+</div>
+<div id="limeModal" class="modal fade" role="dialog">
+    <div class="modal-dialog" role="document">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h3 class="modal-title">LIME Explanations using LinearSVC</h3>
+            </div>
+            <div class="modal-body" id="limeModalBody">
+                <!-- LIME explanations -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
         </div>
     </div>
 </div>
@@ -59,12 +89,28 @@
                 }
             };
             $.ajax(callDetails).done(function (result) {
-                if(result.score == 1){
+                if (result.score == 1) {
                     $("#resultDiv").text(result.message + " is a PTO message");
                 }
-                else{
+                else {
                     $("#resultDiv").text(result.message + " is not a PTO message");
                 }
+            });
+        });
+        $("#explainResults").click(function () {
+            var exp;
+            var message = $('#query').val();
+            var callDetails = {
+                type: 'POST',
+                url: '/is-pto',
+                data: {
+                    'message': message
+                }
+            };
+            $.ajax(callDetails).done(function (result) {
+                $("#limeModalBody").html(result.exp)
+                // Open the modal
+                $("#limeModal").modal("show");
             });
         });
     });
