@@ -1,10 +1,11 @@
 """
-Figure out if a message sent is a PTO or not
+Figure out if a message sent is a PTO or not and show the explanations for the prediction
 """
 import os
 import pickle
 import re
 import is_pto.preprocess_message as message_cleaner
+from lime.lime_text import LimeTextExplainer
 
 CURRENT_DIRECTORY = os.path.dirname(__file__)
 MODEL_FILENAME = os.path.join(CURRENT_DIRECTORY, 'pto_classifier.pickle')
@@ -31,3 +32,13 @@ def is_this_a_pto(message):
         answer = model.predict([message])[0]
 
     return answer
+
+def lime_explainer(message):   
+    "Return the Lime explanations" 
+    class_names = ['0', '1']
+    model = get_model()
+    message = message_cleaner.get_clean_message(message)    
+    explainer = LimeTextExplainer(class_names=class_names)    
+    exp = explainer.explain_instance(message, model.predict_proba, num_features=50, num_samples=100)
+   
+    return exp
