@@ -23,6 +23,11 @@ def about():
     "About page"
     return render_template("about.html")
 
+def write_inference_data_to_file(text:str, prediction:int):
+    "Write the inference output to a file"
+    with open("inference_data.txt" , "a") as data_file:
+        data_file.write(f"{text},{prediction}\n")
+
 @app.route("/is-pto", methods=['GET', 'POST'])
 def is_pto():
     "Is the message a PTO?"
@@ -30,6 +35,7 @@ def is_pto():
     if request.method == 'POST':
         message = request.form.get('message')
         prediction_score = int(pto_classifier.is_this_a_pto(message))
+        write_inference_data_to_file(message, prediction_score) # Write output to file
         response = jsonify({"score" : prediction_score, "message" : message})
     return response
 
